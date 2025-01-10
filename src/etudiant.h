@@ -12,4 +12,21 @@ typedef struct {
     char region[30];
 } Etudiant;
 
+/* === Prototypes des fonctions === */
+
+void enregistrerEtudiant(Etudiant etudiants[], int *n);
+void afficherEtudiants(Etudiant etudiants[], int n);
+void afficherUnEtudiant(Etudiant e);
+
+int rechercherParMatricule(Etudiant etudiants[], int n, int matricule);
+int rechercheDichotomique(Etudiant etudiants[], int n, int matricule);
+
+void supprimerEtudiant(Etudiant etudiants[], int *n);
+void modifierEtudiant(Etudiant etudiants[], int n);
+
+void trierParNom(Etudiant etudiants[], int n);
+void trierParFiliere(Etudiant etudiants[], int n);
+
+int calculerAge(Etudiant e);
+
 #endif
