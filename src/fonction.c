@@ -20,7 +20,7 @@ void supprimerEtudiant(Etudiant etudiants[], int *n) {
     // Innocent
 }
 
-void modifierEtudiant(Etudiant *e) {
+void modifierEtudiant(Etudiant *e) { 
     // Meldeke
 }
 
