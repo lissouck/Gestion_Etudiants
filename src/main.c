@@ -49,19 +49,41 @@ int main() {
 
         switch (choix) {
             case 1: enregistrerEtudiant(etudiants, &n); break;
-            case 2: 
-                // modifierEtudiant(&etudiants[0]); // test temporaire
-                printf("Option réservée à Meldeke\n");
+            case 2: modifierEtudiant(etudiants, n); break;
+            case 3: {
+                int m;
+                printf("Matricule : ");
+                scanf("%d", &m);
+                getchar();
+                int i = rechercherParMatricule(etudiants, n, m);
+                if (i != -1) afficherUnEtudiant(etudiants[i]);
+                else printf("Non trouve\n");
                 break;
-            case 3: printf("Option réservée à Innocent\n"); break;
-            case 4: printf("Option réservée à Innocent\n"); break;
-            case 5: printf("Option réservée à Mboto\n"); break;
-            case 6: printf("Option réservée à Innocent\n"); break;
-            case 7: printf("Option réservée à Meldeke\n"); break;
-            case 8: printf("Option réservée à Mboto\n"); break;
+            }
+            case 4: supprimerEtudiant(etudiants, &n); break;
+            case 5: trierParNom(etudiants, n); break;
+            case 6: {
+                int m;
+                printf("Matricule : ");
+                scanf("%d", &m);
+                getchar();
+                int i = rechercheDichotomique(etudiants, n, m);
+                if (i != -1) afficherUnEtudiant(etudiants[i]);
+                else printf("Non trouve\n");
+                break;
+            }
+            case 7: {
+                int m;
+                printf("Matricule : ");
+                scanf("%d", &m);
+                getchar();
+                int i = rechercherParMatricule(etudiants, n, m);
+                if (i != -1)
+                    printf("Age : %d ans\n", calculerAge(etudiants[i]));
+                break;
+            }
+            case 8: trierParFiliere(etudiants, n); break;
             case 9: afficherEtudiants(etudiants, n); break;
-            case 0: printf("Fin du programme.\n"); break;
-            default: printf("Choix invalide.\n");
         }
 
     } while (choix != 0);
