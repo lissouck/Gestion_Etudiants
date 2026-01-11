@@ -14,8 +14,9 @@ typedef struct {
 
 /* === Prototypes des fonctions === */
 
-void enregistrerEtudiant(Etudiant etudiants[], int *n);
+void enregistrerEtudiant(Etudiant etudiants[], int index);
 void afficherEtudiants(Etudiant etudiants[], int n);
+int dateValide(const char date[]);
 void afficherUnEtudiant(Etudiant e);
 
 int rechercherParMatricule(Etudiant etudiants[], int n, int matricule);
