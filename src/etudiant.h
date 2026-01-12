@@ -31,5 +31,6 @@ void trierParFiliere(Etudiant etudiants[], int n);
 int calculerAge(Etudiant e);
 
 int comparerParNom(const void *a, const void *b);
+int comparerParFiliere(const void *a, const void *b)
 
 #endif

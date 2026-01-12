@@ -95,11 +95,18 @@ void modifierEtudiant(Etudiant *e) {
     // Meldeke
 }
 
-/Fonction pour comparer(Tri alphabétique) le nom de 02 étudiants
+//Fonction pour comparer(Tri alphabétique) le nom de 02 étudiants
 int comparerParNom(const void *a, const void *b){
     const Etudiant *e1 = a;
     const Etudiant *e2 = b;
     return strcmp(e1->nom, e2->nom);
+}
+
+//Fonction pour comparer(Tri alphabétique) la filière de 02 étudiants
+int comparerParFiliere(const void *a, const void *b){
+    const Etudiant *e1 = a;
+    const Etudiant *e2 = b;
+    return strcmp(e1->filiere, e2->filiere);
 }
 
 void trierParNom(Etudiant etudiants[], int n){
@@ -124,6 +131,30 @@ void trierParNom(Etudiant etudiants[], int n){
     }
     printf("+-----+-----------+-------------------------------------+------------+-------------------+\n");
 }
+
+
+void trierParFiliere(Etudiant etudiants[], int n){
+    //Tri par filière
+    qsort(etudiants, n, sizeof(Etudiant), comparerParFiliere);
+
+    //Affichage des noms des étudiants par ordre de filiere
+    printf("Liste triée par filiere\n");
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
+    printf("|  N° | MATRICULE |             NOM ET PRENOM(S)        |    SEXE    | DATE DE NAISSANCE |        FILIERE          |\n");
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
+    
+    for(int i = 0; i < n; i++){
+
+        //Assemblage pour former le nom complet i.e nom + prénom
+        char nom_complet[60];
+        snprintf(nom_complet, sizeof(nom_complet), "%s %s", etudiants[i].nom, etudiants[i].prenom);
+        
+        //Affichage formaté
+        printf("| %3d | %-9d | %-35s | %-10s | %-17s | %-23s |\n", i+1, etudiants[i].matricule, nom_complet, etudiants[i].sexe, etudiants[i].date_naissance, etudiants[i].filiere);
+    }
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
+}
+
 
 int rechercheDichotomique(Etudiant etudiants[], int n, int matricule) {
     // Innocent
