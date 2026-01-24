@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "etudiant.h"
 
-#define MAX 100
+#define MAX 200
 
 int main() {
 
