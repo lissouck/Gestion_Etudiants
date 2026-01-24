@@ -92,7 +92,30 @@ void supprimerEtudiant(Etudiant etudiants[], int *n) {
 }
 
 void modifierEtudiant(Etudiant *e) {
-    // Meldeke
+    int mat;
+    printf("Matricule a modifier : ");
+    scanf("%d", &mat);
+    getchar();
+
+    int idx = rechercherParMatricule(etudiants, n, mat);
+    if (idx == -1) {
+        printf("Etudiant non trouve.\n");
+        return;
+    }
+
+    Etudiant *e = &etudiants[idx];
+
+    printf("Nouveau nom : ");
+    scanf("%s", e->nom);
+    getchar();
+    printf("Nouveau prenom : ");
+    scanf("%s", e->prenom);
+    getchar();
+    printf("Nouvelle filiere : ");
+    scanf("%s", e->filiere);
+    getchar();
+
+    printf("Modification effectuee.\n");
 }
 
 //Fonction pour comparer(Tri alphabétique) le nom de 02 étudiants
@@ -162,6 +185,14 @@ int rechercheDichotomique(Etudiant etudiants[], int n, int matricule) {
 }
 
 int calculerAge(Etudiant e) {
-    // Meldeke
+    int j, m, a;
+    if (sscanf(e.date_naissance, "%d/%d/%d", &j, &m, &a) != 3)
+        return -1;
+        
+        time_t t = time(NULL);
+    struct tm *now = localtime(&t);
+
+    return (now->tm_year + 1900) - a;
+
     return 0;
 }
