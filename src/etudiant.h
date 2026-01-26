@@ -13,8 +13,8 @@ typedef struct {
 } Etudiant;
 
 /* === Prototypes des fonctions === */
-
-void enregistrerEtudiant(Etudiant etudiants[], int index);
+void enregistrerEtudiant(Etudiant etudiants[], int *n);
+// void enregistrerEtudiant(Etudiant etudiants[], int index);
 void afficherEtudiants(Etudiant etudiants[], int n);
 int dateValide(const char date[]);
 void afficherUnEtudiant(Etudiant e);
@@ -29,5 +29,8 @@ void trierParNom(Etudiant etudiants[], int n);
 void trierParFiliere(Etudiant etudiants[], int n);
 
 int calculerAge(Etudiant e);
+
+int comparerParNom(const void *a, const void *b);
+int comparerParFiliere(const void *a, const void *b);
 
 #endif

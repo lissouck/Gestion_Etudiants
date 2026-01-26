@@ -4,89 +4,358 @@
 #define MAX 100
 
 int main() {
-
     Etudiant etudiants[MAX];
     int n = 0, choix;
+    int i;
 
-    printf("Nombre d'etudiants au depart : ");
+    /* Saisie initiale des étudiants */
+    printf("Entrez le nombre d'etudiants que vous souhaitez enregistrer ");
     scanf("%d", &n);
     getchar();
 
-    for (int i = 0; i < n; i++) {
+    if (n < 0 || n > MAX) {
+        printf("Nombre invalide (max %d)\n", MAX);
+        return 1;
+    }
+
+    for (i = 0; i < n; i++) {
         printf("\nEtudiant %d\n", i + 1);
+
         printf("Matricule : ");
         scanf("%d", &etudiants[i].matricule);
         getchar();
+
         printf("Nom : ");
         scanf("%s", etudiants[i].nom);
         getchar();
+
         printf("Prenom : ");
         scanf("%s", etudiants[i].prenom);
         getchar();
+
         printf("Date naissance (jj/mm/aaaa) : ");
         scanf("%s", etudiants[i].date_naissance);
         getchar();
+
         printf("Sexe : ");
         scanf("%s", etudiants[i].sexe);
         getchar();
+
         printf("Departement : ");
         scanf("%s", etudiants[i].departement);
         getchar();
+
         printf("Filiere : ");
         scanf("%s", etudiants[i].filiere);
         getchar();
+
         printf("Region : ");
         scanf("%s", etudiants[i].region);
         getchar();
     }
 
     do {
-        printf("\n1-Enregistrer\n2-Modifier\n3-Rechercher\n4-Supprimer\n");
-        printf("5-Trier Nom\n6-Recherche Dichotomique\n7-Age\n8-Trier Filiere\n9-Afficher\n0-Quitter\n");
+        printf("\n1-Enregistrer\n2-Afficher\n3-Modifier\n4-Rechercher\n5-Supprimer\n");
+        printf("6-Trier Nom\n7-Recherche Dichotomique\n8-Age\n9-Trier Filiere\n0-Quitter\n");
         printf("Choix : ");
         scanf("%d", &choix);
         getchar();
 
         switch (choix) {
-            case 1: enregistrerEtudiant(etudiants, &n); break;
-            case 2: modifierEtudiant(etudiants, n); break;
-            case 3: {
+            case 1:
+                enregistrerEtudiant(etudiants, &n);
+                break;
+
+            case 2:
+                afficherEtudiants(etudiants, n);  // case 2 = afficher
+                break;
+
+            case 3:
+                modifierEtudiant(etudiants, n);
+                break;
+
+            case 4: {
                 int m;
                 printf("Matricule : ");
                 scanf("%d", &m);
                 getchar();
-                int i = rechercherParMatricule(etudiants, n, m);
-                if (i != -1) afficherUnEtudiant(etudiants[i]);
-                else printf("Non trouve\n");
+                i = rechercherParMatricule(etudiants, n, m);
+                // if (i != -1) afficherUnEtudiant(etudiants[i]);
+                // else printf("Non trouve\n");
                 break;
             }
-            case 4: supprimerEtudiant(etudiants, &n); break;
-            case 5: trierParNom(etudiants, n); break;
-            case 6: {
-                int m;
-                printf("Matricule : ");
-                scanf("%d", &m);
-                getchar();
-                int i = rechercheDichotomique(etudiants, n, m);
-                if (i != -1) afficherUnEtudiant(etudiants[i]);
-                else printf("Non trouve\n");
+
+            case 5:
+                supprimerEtudiant(etudiants, &n);
                 break;
-            }
+
+            case 6:
+                trierParNom(etudiants, n);
+                break;
+
             case 7: {
                 int m;
                 printf("Matricule : ");
                 scanf("%d", &m);
                 getchar();
-                int i = rechercherParMatricule(etudiants, n, m);
-                if (i != -1)
-                    printf("Age : %d ans\n", calculerAge(etudiants[i]));
+                i = rechercheDichotomique(etudiants, n, m);
+                // if (i != -1) afficherEtudiants(etudiants[i]);
+                // else printf("Non trouve\n");
                 break;
             }
-            case 8: trierParFiliere(etudiants, n); break;
-            case 9: afficherEtudiants(etudiants, n); break;
+
+            case 8: {
+                int m;
+                printf("Matricule : ");
+                scanf("%d", &m);
+                getchar();
+                i = rechercherParMatricule(etudiants, n, m);
+                if (i != -1)
+                    printf("Age : %d ans\n", calculerAge(etudiants[i]));
+                else
+                    printf("Non trouve\n");
+                break;
+            }
+
+            case 9:
+                trierParFiliere(etudiants, n);
+                break;
+
+            default:
+                if (choix != 0)
+                    printf("Choix invalide\n");
+                break;
         }
 
     } while (choix != 0);
 
     return 0;
 }
+
+
+// #include <stdio.h>
+// #include "etudiant.h"
+
+// #define MAX 100
+
+// int main() {
+//     Etudiant etudiants[MAX];
+//     int n = 0, choix;
+//     int i;
+
+//     /* Saisie initiale des étudiants */
+//     printf("Nombre d'etudiants au depart : ");
+//     scanf("%d", &n);
+//     getchar();
+
+//     if (n < 0 || n > MAX) {
+//         printf("Nombre invalide (max %d)\n", MAX);
+//         return 1;
+//     }
+
+//     for (i = 0; i < n; i++) {
+//         printf("\nEtudiant %d\n", i + 1);
+
+//         printf("Matricule : ");
+//         scanf("%d", &etudiants[i].matricule);
+//         getchar();
+
+//         printf("Nom : ");
+//         scanf("%s", etudiants[i].nom);
+//         getchar();
+
+//         printf("Prenom : ");
+//         scanf("%s", etudiants[i].prenom);
+//         getchar();
+
+//         printf("Date naissance (jj/mm/aaaa) : ");
+//         scanf("%s", etudiants[i].date_naissance);
+//         getchar();
+
+//         printf("Sexe : ");
+//         scanf("%s", etudiants[i].sexe);
+//         getchar();
+
+//         printf("Departement : ");
+//         scanf("%s", etudiants[i].departement);
+//         getchar();
+
+//         printf("Filiere : ");
+//         scanf("%s", etudiants[i].filiere);
+//         getchar();
+
+//         printf("Region : ");
+//         scanf("%s", etudiants[i].region);
+//         getchar();
+//     }
+
+//     do {
+//         printf("\n1-Enregistrer\n2-Modifier\n3-Rechercher\n4-Supprimer\n");
+//         printf("5-Trier Nom\n6-Recherche Dichotomique\n7-Age\n8-Trier Filiere\n9-Afficher\n0-Quitter\n");
+//         printf("Choix : ");
+//         scanf("%d", &choix);
+//         getchar();
+
+//         switch (choix) {
+//             case 1:
+//                 enregistrerEtudiant(etudiants, &n);
+//                 break;
+
+//             case 2:
+//                 modifierEtudiant(etudiants, n);
+//                 break;
+
+//             case 3: {
+//                 int m;
+//                 printf("Matricule : ");
+//                 scanf("%d", &m);
+//                 getchar();
+//                 i = rechercherParMatricule(etudiants, n, m);
+//                 if (i != -1) afficherUnEtudiant(etudiants[i]);
+//                 else printf("Non trouve\n");
+//                 break;
+//             }
+
+//             case 4:
+//                 supprimerEtudiant(etudiants, &n);
+//                 break;
+
+//             case 5:
+//                 trierParNom(etudiants, n);
+//                 break;
+
+//             case 6: {
+//                 int m;
+//                 printf("Matricule : ");
+//                 scanf("%d", &m);
+//                 getchar();
+//                 i = rechercheDichotomique(etudiants, n, m);
+//                 if (i != -1) afficherUnEtudiant(etudiants[i]);
+//                 else printf("Non trouve\n");
+//                 break;
+//             }
+
+//             case 7: {
+//                 int m;
+//                 printf("Matricule : ");
+//                 scanf("%d", &m);
+//                 getchar();
+//                 i = rechercherParMatricule(etudiants, n, m);
+//                 if (i != -1)
+//                     printf("Age : %d ans\n", calculerAge(etudiants[i]));
+//                 else
+//                     printf("Non trouve\n");
+//                 break;
+//             }
+
+//             case 8:
+//                 trierParFiliere(etudiants, n);
+//                 break;
+
+//             case 9:
+//                 afficherEtudiants(etudiants, n);
+//                 break;
+
+//             default:
+//                 if (choix != 0)
+//                     printf("Choix invalide\n");
+//                 break;
+//         }
+
+//     } while (choix != 0);
+
+//     return 0;
+// }
+
+// // #include <stdio.h>
+// // #include "etudiant.h"
+
+// // #define MAX 100
+
+// // int main() {
+
+// //     Etudiant etudiants[MAX];
+// //     int n = 0, choix;
+
+// //     printf("Nombre d'etudiants au depart : ");
+// //     scanf("%d", &n);
+// //     getchar();
+
+// //     for (int i = 0; i < n; i++) {
+// //         printf("\nEtudiant %d\n", i + 1);
+// //         printf("Matricule : ");
+// //         scanf("%d", &etudiants[i].matricule);
+// //         getchar();
+// //         printf("Nom : ");
+// //         scanf("%s", etudiants[i].nom);
+// //         getchar();
+// //         printf("Prenom : ");
+// //         scanf("%s", etudiants[i].prenom);
+// //         getchar();
+// //         printf("Date naissance (jj/mm/aaaa) : ");
+// //         scanf("%s", etudiants[i].date_naissance);
+// //         getchar();
+// //         printf("Sexe : ");
+// //         scanf("%s", etudiants[i].sexe);
+// //         getchar();
+// //         printf("Departement : ");
+// //         scanf("%s", etudiants[i].departement);
+// //         getchar();
+// //         printf("Filiere : ");
+// //         scanf("%s", etudiants[i].filiere);
+// //         getchar();
+// //         printf("Region : ");
+// //         scanf("%s", etudiants[i].region);
+// //         getchar();
+// //     }
+
+// //     do {
+// //         printf("\n1-Enregistrer\n2-Modifier\n3-Rechercher\n4-Supprimer\n");
+// //         printf("5-Trier Nom\n6-Recherche Dichotomique\n7-Age\n8-Trier Filiere\n9-Afficher\n0-Quitter\n");
+// //         printf("Choix : ");
+// //         scanf("%d", &choix);
+// //         getchar();
+
+// //         switch (choix) {
+// //             case 1: enregistrerEtudiant(etudiants, &n); break;
+// //             case 2: modifierEtudiant(etudiants, n); break;
+// //             case 3: {
+// //                 int m;
+// //                 printf("Matricule : ");
+// //                 scanf("%d", &m);
+// //                 getchar();
+// //                 int i = rechercherParMatricule(etudiants, n, m);
+// //                 if (i != -1) afficherUnEtudiant(etudiants[i]);
+// //                 else printf("Non trouve\n");
+// //                 break;
+// //             }
+// //             case 4: supprimerEtudiant(etudiants, &n); break;
+// //             case 5: trierParNom(etudiants, n); break;
+// //             case 6: {
+// //                 int m;
+// //                 printf("Matricule : ");
+// //                 scanf("%d", &m);
+// //                 getchar();
+// //                 int i = rechercheDichotomique(etudiants, n, m);
+// //                 if (i != -1) afficherUnEtudiant(etudiants[i]);
+// //                 else printf("Non trouve\n");
+// //                 break;
+// //             }
+// //             case 7: {
+// //                 int m;
+// //                 printf("Matricule : ");
+// //                 scanf("%d", &m);
+// //                 getchar();
+// //                 int i = rechercherParMatricule(etudiants, n, m);
+// //                 if (i != -1)
+// //                     printf("Age : %d ans\n", calculerAge(etudiants[i]));
+// //                 break;
+// //             }
+// //             case 8: trierParFiliere(etudiants, n); break;
+// //             case 9: afficherEtudiants(etudiants, n); break;
+// //         }
+
+// //     } while (choix != 0);
+
+// //     return 0;
+// // }
