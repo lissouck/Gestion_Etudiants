@@ -12,6 +12,7 @@ typedef struct {
     char region[30];
 } Etudiant;
 
+<<<<<<< HEAD
 /* === Prototypes des fonctions === */
 void enregistrerEtudiant(Etudiant etudiants[], int *n);
 // void enregistrerEtudiant(Etudiant etudiants[], int index);
@@ -33,4 +34,6 @@ int calculerAge(Etudiant e);
 int comparerParNom(const void *a, const void *b);
 int comparerParFiliere(const void *a, const void *b);
 
+=======
+>>>>>>> 9e04e77e11b698bc5a437806abee938ee4a83ed0
 #endif

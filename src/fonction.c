@@ -1,12 +1,28 @@
+<<<<<<< HEAD
     #include <stdio.h>
     #include "etudiant.h"
 
     void enregistrerEtudiant(Etudiant etudiants[], int *n) {
         int dateValide(const char date[]) {
         int j, m, a;
+=======
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include "etudiant.h"
+
+void enregistrerEtudiant(Etudiant etudiants[], int *n) {
+   
+}
+int dateValide(const char date[]) {
+    int j, m, a;
+>>>>>>> 9e04e77e11b698bc5a437806abee938ee4a83ed0
 
         if (sscanf(date, "%d/%d/%d", &j, &m, &a) != 3)
             return 0;
+<<<<<<< HEAD
 
         if (a < 1900 || a > 2025)
             return 0;
@@ -43,6 +59,20 @@ void nettoyerFinLigne(char *s) {
 
 void enregistrerEtudiant(Etudiant etudiants[], int index) {
     int dateValide(const char date[]);  // prototype de validation de date
+=======
+        }
+    return 1; // date valide
+    } 
+void nettoyerFinLigne(char *chaine) {
+    size_t len = strlen(chaine);
+    if (len > 0 && chaine[len - 1] == '\n') {
+        chaine[len - 1] = '\0';
+    }
+}
+
+void enregistrerEtudiant(Etudiant etudiants[], int *n) {
+    int index = *n;
+>>>>>>> 9e04e77e11b698bc5a437806abee938ee4a83ed0
 
     printf("\n--- Enregistrement de l'etudiant %d ---\n", index + 1);
 
@@ -95,6 +125,7 @@ void enregistrerEtudiant(Etudiant etudiants[], int index) {
     fgets(etudiants[index].region,
           sizeof(etudiants[index].region), stdin);
     nettoyerFinLigne(etudiants[index].region);
+    (*n)++;
 }
 
 
@@ -112,6 +143,7 @@ void enregistrerEtudiant(Etudiant etudiants[], int index) {
     //     fgets(etudiants[index].nom, sizeof(etudiants[index].prenom), stdin);
     //     nettoyerFinLigne(etudiants[index].prenom);
 
+<<<<<<< HEAD
 
     //     do {
     //         printf("Date de naissance (jj/mm/aaaa) : \n");
@@ -207,3 +239,119 @@ void enregistrerEtudiant(Etudiant etudiants[], int index) {
 
 
  
+=======
+void modifierEtudiant(Etudiant *e) {
+    int mat;
+    printf("Matricule a modifier : ");
+    scanf("%d", &mat);
+    getchar();
+    Etudiant etudiants[100];
+    int n;
+
+   int idx = rechercherParMatricule(etudiants, n, mat);
+    if (idx == -1) {
+        printf("Etudiant non trouve.\n");
+        return;
+    }
+
+    Etudiant *e = &etudiants[idx];
+
+    printf("Nouveau nom : ");
+    scanf("%s", e->nom);
+    getchar();
+    printf("Nouveau prenom : ");
+    scanf("%s", e->prenom);
+    getchar();
+    printf("Nouvelle filiere : ");
+    scanf("%s", e->filiere);
+    getchar();
+
+    printf("Modification effectuee.\n");
+}
+
+//Fonction pour comparer(Tri alphabétique) le nom de 02 étudiants
+int comparerParNom(const void *a, const void *b){
+    const Etudiant *e1 = a;
+    const Etudiant *e2 = b;
+    return strcmp(e1->nom, e2->nom);
+}
+
+//Fonction pour comparer(Tri alphabétique) la filière de 02 étudiants
+int comparerParFiliere(const void *a, const void *b){
+    const Etudiant *e1 = a;
+    const Etudiant *e2 = b;
+    return strcmp(e1->filiere, e2->filiere);
+}
+
+void trierParNom(Etudiant etudiants[], int n){
+
+    //Tri par nom uniquement
+    qsort(etudiants, n, sizeof(Etudiant), comparerParNom);
+
+    //Affichage des noms par ordre alphabétique
+    printf("Affichage par ordre alphabétique\n");
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+\n");
+    printf("|  N° | MATRICULE |           NOM ET PRENOM(S)          |    SEXE    | DATE DE NAISSANCE |\n");
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+\n");
+    
+    for(int i = 0; i < n; i++){
+
+        //Assemblage pour former le nom complet i.e nom + prénom
+        char nom_complet[60];
+        snprintf(nom_complet, sizeof(nom_complet), "%s %s", etudiants[i].nom, etudiants[i].prenom);
+        
+        //Affichage formaté
+       printf("| %3d | %-9d | %-35s | %-10s | %-17s | %-23s |\n",
+       i+1, etudiants[i].matricule, nom_complet, etudiants[i].sexe,
+       etudiants[i].date_naissance, etudiants[i].filiere);
+    }
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+\n");
+}
+
+void trierParFiliere(Etudiant etudiants[], int n){
+    //Tri par filière
+    qsort(etudiants, n, sizeof(Etudiant), comparerParFiliere);
+
+    //Affichage des noms des étudiants par ordre de filiere
+    printf("Liste triée par filiere\n");
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
+    printf("|  N° | MATRICULE |             NOM ET PRENOM(S)        |    SEXE    | DATE DE NAISSANCE |        FILIERE          |\n");
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
+    
+    for(int i = 0; i < n; i++){
+
+        //Assemblage pour former le nom complet i.e nom + prénom
+        char nom_complet[60];
+        snprintf(nom_complet, sizeof(nom_complet), "%s %s", etudiants[i].nom, etudiants[i].prenom);
+        
+        //Affichage formaté
+        printf("| %3d | %-9d | %-35s | %-10s | %-17s | %3d |\n",
+       i+1, etudiants[i].matricule, nom_complet, etudiants[i].sexe,
+       etudiants[i].date_naissance, calculerAge(etudiants[i]));
+    }
+    printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
+}
+int rechercheDichotomique(Etudiant etudiants[], int n, int matricule) {
+    // Innocent
+    return -1;
+}
+
+     
+int calculerAge(Etudiant e) {
+    int j, m, a;
+    if (sscanf(e.date_naissance, "%d/%d/%d", &j, &m, &a) != 3)
+        return -1;
+        
+        time_t t = time(NULL);
+    struct tm *now = localtime(&t);
+
+    int age = (now->tm_year + 1900) - a;
+
+    // Ajustement si l'anniversaire n'est pas encore passé cette année
+    if ((now->tm_mon + 1) < m || ((now->tm_mon + 1) == m && now->tm_mday < j)) {
+        age--;
+    }
+
+    return age;
+}
+>>>>>>> 9e04e77e11b698bc5a437806abee938ee4a83ed0
