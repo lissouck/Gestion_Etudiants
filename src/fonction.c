@@ -86,18 +86,11 @@ void enregistrerEtudiant(Etudiant etudiants[], int *n) {
 }
 
 
-void afficherEtudiants(Etudiant etudiants[], int n) {
-    // Emma
-    printf("[emma doit coder]\n");
-}
-
 int rechercherParMatricule(Etudiant etudiants[], int n, int matricule) {
-    // Innocent
+    for (int i = 0; i < n; i++)
+        if (etudiants[i].matricule == matricule)
+            return i;
     return -1;
-}
-
-void supprimerEtudiant(Etudiant etudiants[], int *n) {
-    // Innocent
 }
 
 void modifierEtudiant(Etudiant *e) {
@@ -192,7 +185,15 @@ void trierParFiliere(Etudiant etudiants[], int n){
     printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
 }
 int rechercheDichotomique(Etudiant etudiants[], int n, int matricule) {
-    // Innocent
+     qsort(etudiants, n, sizeof(Etudiant), comparerParMatricule);
+
+    int g = 0, d = n - 1;
+    while (g <= d) {
+        int m = (g + d) / 2;
+        if (etudiants[m].matricule == matricule) return m;
+        if (etudiants[m].matricule < matricule) g = m + 1;
+        else d = m - 1;
+    }
     return -1;
 }
 
