@@ -185,7 +185,7 @@ void trierParFiliere(Etudiant etudiants[], int n){
     printf("+-----+-----------+-------------------------------------+------------+-------------------+-------------------------+\n");
 }
 int rechercheDichotomique(Etudiant etudiants[], int n, int matricule) {
-     qsort(etudiants, n, sizeof(Etudiant), comparerParMatricule);
+     qsort(etudiants, n, sizeof(Etudiant), comparerParMatricule());
 
     int g = 0, d = n - 1;
     while (g <= d) {
