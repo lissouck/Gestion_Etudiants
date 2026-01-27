@@ -353,4 +353,5 @@ void rechercherDichotomiqueMenu() {
     else {
         printf("\nAucun etudiant trouve avec le matricule : %s\n", matricule);
     }
+
 }
